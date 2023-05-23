@@ -1,6 +1,6 @@
 <?php
 // Connect to the database
-$dsn = 'mysql:host=localhost;dbname=';
+$dsn = 'mysql:host=localhost;dbname=voting_system';
 $user = 'root';
 $pass = '';
 $options = [

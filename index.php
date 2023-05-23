@@ -17,8 +17,8 @@
 
         <div class="container">
             <div>
-                <label>Username</label>
-                <input type="text" name="username">
+                <label>Student Identifier</label>
+                <input type="text" name="user_id">
             </div>
             <div>
                 <label>Password</label>

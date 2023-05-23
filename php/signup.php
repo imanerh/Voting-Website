@@ -17,20 +17,19 @@
 
         <div class="container">
             <div>
-                <label>Username</label>
-                <input type="text" name="username">
+                <input type="text" name="user_id" placeholder="Student Identifier">
             </div>
             <div>
-                <label>Email</label>
-                <input type="email" name="email">
+                <input type="text" name="username" placeholder="Username">
             </div>
             <div>
-                <label>Password</label>
-                <input type="password" name="password_1">
+                <input type="email" name="email" placeholder="Email">
             </div>
             <div>
-                <label>Confirm password</label>
-                <input type="password" name="password_2">
+                <input type="password" name="password_1" placeholder="Password">
+            </div>
+            <div>
+                <input type="password" name="password_2" placeholder="Confirm password">
             </div>
             <div>
                 <button type="submit" class="btn" name="reg_submit">Sign up</button>

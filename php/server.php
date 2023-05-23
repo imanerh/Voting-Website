@@ -7,8 +7,9 @@ session_start();
 // REGISTER USER
 if (isset($_POST['reg_submit'])) {
 
-    if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password_1']) && !empty($_POST['password_2'])) { // if all required fields are filled
+    if (!empty($_POST['user_id']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password_1']) && !empty($_POST['password_2'])) { // if all required fields are filled
 
+        $user_id = $_POST['user_id'];
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password_1 = $_POST['password_1'];
@@ -20,37 +21,30 @@ if (isset($_POST['reg_submit'])) {
         } else {
 
             // Check that the user does not already exist with the same username and/or email
-            global $ConnectingDB;
-            $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
+            $ConnectingDB = $GLOBALS['connexion'];
+            $user_check_query = "SELECT * FROM users WHERE user_id='$user_id' OR email='$email' LIMIT 1";
             $stmt = $ConnectingDB->prepare($user_check_query);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($stmt->rowCount() == 1) { // if user exists
-                if ($user['username'] === $username) {
-                    echo "<script>alert('This username already exists!')</script>";
-                    // header('location: signup.php');
+                if ($user['user_id'] === $user_id) {
+                    echo "<script>alert('This student already exists!')</script>";
                 } else if ($user['email'] === $email) {
                     echo "<script>alert('Email already exists!')</script>";
-                    // header('location: signup.php');
                 }
             } else { // if the user doesn't exist, register the user
                 //encrypt the password before saving in the database
                 $hashed_password = password_hash($password_1, PASSWORD_BCRYPT);
-                $add_user_query = "INSERT INTO users (username, email, upassword, statut) 
-                        VALUES('$username', '$email', '$hashed_password', 'client')";
+                $add_user_query = "INSERT INTO users (user_id, username, email, password) 
+                        VALUES('$user_id', '$username', '$email', '$hashed_password')";
                 $stmt = $ConnectingDB->prepare($add_user_query);
                 $stmt->execute();
+                $_SESSION['user_id'] = $user_id;
                 $_SESSION['username'] = $username;
-                $_SESSION['message'] = "Thank you for your registration!";
-
-                $id_query = "SELECT * FROM users WHERE username='$username'";
-                $stmt = $ConnectingDB->prepare($id_query);
-                $stmt->execute();
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['id'] = $user['user_id'];
-
-                header('location: homepageClient.php');
+                $_SESSION['role'] = "Student";
+                
+                header('location: DashboardStudent.php');
             }
         }
     } else { // if some required field isn't filled
@@ -62,42 +56,42 @@ if (isset($_POST['reg_submit'])) {
 // LOGIN USER
 if (isset($_POST['log_submit'])) {
 
-    $username = $_POST['username'];
+    $user_id = $_POST['user_id'];
     $password = $_POST['password'];
 
-    if (!empty($username) && !empty($password)) { // if all required fields are filled
+    if (!empty($user_id) && !empty($password)) { // if all required fields are filled
 
-        $query = "SELECT * FROM users WHERE username= '$username'";
+        $ConnectingDB = $GLOBALS['connexion'];
+        $query = "SELECT * FROM users WHERE user_id= '$user_id'";
         $stmt = $ConnectingDB->prepare($query);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) { // if username exists
-            if (password_verify($password, $user['upassword'])) { // verify if the password is correct
-                $_SESSION['username'] = $username;
-                $_SESSION['message'] = "You are now logged in";
-
-                $id_query = "SELECT * FROM users WHERE username='$username'";
+            if (password_verify($password, $user['password'])) { // verify if the password is correct
+                $_SESSION['user_id'] = $user_id;
+                if ($user['is_admin']) {
+                    $_SESSION['role'] = "Admin";
+                } else {
+                    $_SESSION['role'] = "Student";
+                }
+                $id_query = "SELECT * FROM users WHERE user_id='$user_id'";
                 $stmt = $ConnectingDB->prepare($id_query);
                 $stmt->execute();
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['id'] = $user['user_id'];
 
-                if ($user['statut'] == 'client') {
-                    header('location: homepageClient.php');
+                if ($user['is_admin'] == true) {
+                    header('location: DashboardAdmin.php');
                 } else {
-                    header('location: homepageRes.php');
+                    header('location: DashboardStudent.php');
                 }
             } else {
-                // header('location: login.php');
                 echo "<script>alert('Incorrect password!')</script>";
             }
 
         } else {
-            // header('location: login.php');
             echo "<script>alert('Username doesn\'t exist!')</script>";
         }
     } else { // if some required field isn't filled
-        // header('location: login.php');
         echo "<script>alert('All fields are required')</script>";
     }
 }

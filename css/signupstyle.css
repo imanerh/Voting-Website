@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200i,400&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-image: url("/images/signup.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+form {
+    position: fixed;
+    left: 5%;
+    top: 50%;
+    margin-top: -230px;
+    width: 360px;
+    height: 460px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+}    
+.container {
+    width: 260px;
+    position: relative;
+    left: 50%;
+    margin-left: -130px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input {
+    width: 250px;
+    height: 25px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+form > h3 {
+    text-align: center;
+}
+form > p {
+    text-align: center;
+}
+.btn {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    width: 90px;
+    position: relative;
+    left: 50%;
+    margin-left: -45px;
+    background: rgb(247, 103, 78);
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+}
+.btn:hover {
+    background-color: rgb(245, 170, 157);
+    font-weight: bold;
+}

@@ -19,6 +19,7 @@ This repository contains the source code for a voting website designed specifica
 - **Admin Privileges**: The admin has special privileges to manage elections, including adding new elections, modifying and deleting existing ones. They also have the authority to approve or reject candidature applications and visualize the voting results.
 - **Campaign Programs**: Each candidate has a campaign program that voters can view, providing additional information about the candidates and their goals.
 - **Election Management**: Elections with end dates that have passed are closed and no longer appear in the dashboard, preventing further voting.
+- **Visualization of Results**: The admin can view the results of each election in a visual format (a pie chart).
 
 
 ## Screenshots
@@ -28,6 +29,18 @@ Here are some screenshots showcasing the user interface and functionality of the
 1. Login Page:
    ![Login Page](https://github.com/imanerh/Examen_Final/assets/65502022/1e8caa29-7a4d-4166-9156-b36d4d720379)
 
+2. Dashboard:
+    - Student:
+      ![Dashboard Student](https://github.com/imanerh/Examen_Final/assets/65502022/30d23319-e4ac-48d4-8977-59b2aaa3a29f)
+    - Admin: 
+      ![Dashboard Admin](https://github.com/imanerh/Examen_Final/assets/65502022/2b55c2d2-01aa-419c-a3c5-6cfd68ec271e)
+
+4. Candidature Application:
+   ![Candidature Application](https://github.com/imanerh/Examen_Final/assets/65502022/7ea73b20-835c-402c-9a46-6f51806ced1c)
+
+5. Voting Results:
+   ![Voting Results](https://github.com/imanerh/Examen_Final/assets/65502022/0c13e565-fb50-4af7-896e-146f38d16d88)
+   
 Feel free to explore the repository to gain further insights into the implementation of this voting website for universities.
 
 
@@ -45,7 +58,7 @@ Follow these detailed steps for a smooth and error-free installation and setup:
 
 ## System Operation
 
-1. User
+## Student
 
 - **Registration and Login**:
   - Visit the website and click on the "Sign Up" button to create an account using your student identifier.
@@ -65,7 +78,7 @@ Follow these detailed steps for a smooth and error-free installation and setup:
   - If you are interested in becoming a candidate, click on the "Be a candidate" button.
   - Fill the form and submit your application. The admin will review your application and either approve or reject it.
 
-2. Admin
+## Admin
 
 - **Admin Login**:
 Use these credentials for admin access:
@@ -78,7 +91,13 @@ Use these credentials for admin access:
   - Modify an Existing Election: Select the election you want to modify and update the relevant information.
   - Delete an Election: Remove an election from the system by clicking on the "delete" button.
  
- - **Candidature Approval**:
+- **Candidature Approval**:
   - As the admin, you will receive candidature applications from students.
   - Review the applications in the admin panel and decide whether to approve or reject them based on the eligibility criteria.
+
+- **Voting Results Visualization**:
+  - The admin can view the results of each election.
+  - In the admin panel, click on the "Statistics" button.
+  - You will see a pie chart representing the distribution of votes among the candidates, alongside the number of votes each candidate has received, and the total number of votes.
+  - This allows you to analyze the outcome of the elections and make informed decisions based on the results.
 

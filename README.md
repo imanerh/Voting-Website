@@ -22,7 +22,7 @@ This repository contains the source code for a voting website designed specifica
 - **Visualization of Results**: The admin can view the results of each election in a visual format (a pie chart).
 
 
-## Screenshots
+## Website Overview
 
 Here are some screenshots showcasing the user interface and functionality of the voting website:
 
@@ -74,7 +74,7 @@ Follow these detailed steps for a smooth and error-free installation and setup:
   - To cast your vote, select the candidate you wish to vote for and click on "Vote".
   - You can vote in any election, but you cannot vote for yourself if you are a candidate.
  
- - **Candidature Application**:
+- **Candidature Application**:
   - If you are interested in becoming a candidate, click on the "Be a candidate" button.
   - Fill the form and submit your application. The admin will review your application and either approve or reject it.
 

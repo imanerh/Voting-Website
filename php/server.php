@@ -17,9 +17,7 @@ if (isset($_POST['reg_submit'])) {
 
         if ($password_1 != $password_2) { // if the user confirms the passwords correctly
             echo "<script>alert('Passwords missmatched!')</script>";
-            // header('location: signup.php');
         } else {
-
             // Check that the user does not already exist with the same username and/or email
             $ConnectingDB = $GLOBALS['connexion'];
             $user_check_query = "SELECT * FROM users WHERE user_id='$user_id' OR email='$email' LIMIT 1";

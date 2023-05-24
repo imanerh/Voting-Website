@@ -4,6 +4,11 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
     font-weight: 400;
+    background-color: white;
+}
+
+nav {
+  background-color: #1a2639;
 }
 
 .card-container {
@@ -19,6 +24,8 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: center;
+  background-color: #d9dad7;
+  color: black;
 }
 .card img {
     width: 100%;
@@ -32,34 +39,24 @@ body {
     font-size: 16px;
     line-height: 1.5;
 } 
-
-.big-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.main {
+  width: 100%;
 }
-.big-card {
-  width: 78.6%;
-  padding: 20px;
-  box-sizing: border-box;
-  margin: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
+button {
+  background-color: #c24d2c;
+  color: white;
+  margin-bottom: 5px;
 }
-.big-card img {
-  width: 77%;
-  height: 90px;
-  border-radius: 5px;
+button:hover {
+  background-color: #c0654c;
+  font-weight: bold;
 }
-.big-card h2 {
-  margin-top: 0;
+#admin_btn {
+  width: 270px;
+  margin-top: 5px;
+  position: relative;
+  left: 67%;
 }
-.big-card p {
-  font-size: 16px;
-  line-height: 1.5;
-} 
-
 #popup_notification {
   position: fixed;
   top: 10%;
@@ -67,4 +64,26 @@ body {
   color: white;
   background: red;
   display: none;
+}
+.reject_btn {
+  width: 50px;
+  background-color: rgb(198, 0, 0);
+  border: none;
+  cursor: pointer;
+  display: inline;
+  border-radius: 5px;
+}
+.accept_btn {
+  width: 50px;
+  background-color: rgb(6, 122, 6);
+  border: none;
+  cursor: pointer;
+  display: inline;
+  border-radius: 5px;
+} 
+.accept_btn:hover {
+  background-color: rgb(241, 142, 142);
+}
+.accept_btn:hover {
+  background-color: rgb(112, 184, 112);
 }

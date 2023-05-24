@@ -20,7 +20,7 @@
                 <input type="text" name="user_id" placeholder="Student Identifier">
             </div>
             <div>
-                <input type="text" name="username" placeholder="Username">
+                <input type="text" name="username" placeholder="Full name">
             </div>
             <div>
                 <input type="email" name="email" placeholder="Email">

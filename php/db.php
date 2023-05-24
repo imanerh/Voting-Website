@@ -13,11 +13,3 @@ try {
     echo "Connection failed: " . $e->getMessage();
 }
 ?>
-
-<!-- 
-$connexion = $GLOBALS['connexion'];
-$query = '';
-$stmt = $connexion->prepare($query);
-$stmt->execute();
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) 
--->

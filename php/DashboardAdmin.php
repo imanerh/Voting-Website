@@ -59,36 +59,46 @@ require_once("db.php");
                     <?php
                     $ConnectingDB = $GLOBALS['connexion'];
                     $election = $ConnectingDB->query("SELECT * FROM elections");
-                    while ($e = $election->fetch(PDO::FETCH_ASSOC)) { ?>
+                    $datetime = date('Y-m-d H:i:s');
+                    while ($e = $election->fetch(PDO::FETCH_ASSOC)) {
+                        if ($e["end_date"] < $datetime) {
+                            continue;
+                        } else {
+                            ?>
 
-                        <div class="card">
-                            <h2>
-                                <?php echo $e['title']; ?>
-                            </h2>
-                            <h3>Code:
-                                <?php echo $e["election_id"]; ?>
-                            </h3>
-                            <img src="../images/vote.jpg" alt="Vote">
-                            <p>
-                                <?php echo $e['description']; ?>
-                            </p>
-                            <p><b>Open from: </b>
-                                <?php echo $e['start_date']; ?>
-                            </p>
-                            <p><b>To: </b>
-                                <?php echo $e['end_date']; ?>
-                            </p>
-                            <form method="POST" action="modifyElection.php">
-                                <input type="hidden" name="election_id" value="<?php echo $e["election_id"]; ?>">
-                                <button type="submit" name="modify" class="btn">Modify</button>
-                            </form>
-                            <form method="post" action="deleteElection.php">
-                                <input type="hidden" name="election_id" value="<?php echo $e["election_id"]; ?>">
-                                <button type="submit" id="delete" name="delete" class="btn">Delete</button>
-                            </form>
-                        </div>
+                            <div class="card">
+                                <h2>
+                                    <?php echo $e['title']; ?>
+                                </h2>
+                                <h3>Code:
+                                    <?php echo $e["election_id"]; ?>
+                                </h3>
+                                <img src="../images/vote.jpg" alt="Vote">
+                                <p>
+                                    <?php echo $e['description']; ?>
+                                </p>
+                                <p><b>Open from: </b>
+                                    <?php echo $e['start_date']; ?>
+                                </p>
+                                <p><b>To: </b>
+                                    <?php echo $e['end_date']; ?>
+                                </p>
+                                <form method="POST" action="modifyElection.php">
+                                    <input type="hidden" name="election_id" value="<?php echo $e["election_id"]; ?>">
+                                    <button type="submit" name="modify" class="btn">Modify</button>
+                                </form>
+                                <form method="post" action="deleteElection.php">
+                                    <input type="hidden" name="election_id" value="<?php echo $e["election_id"]; ?>">
+                                    <button type="submit" id="delete" name="delete" class="btn">Delete</button>
+                                </form>
+                                <form method="post" action="charts.php">
+                                    <input type="hidden" name="election_id" value="<?php echo $e["election_id"]; ?>">
+                                    <button type="submit" id="stat" name="stat" class="btn">Statistics</button>
+                                </form>
+                            </div>
 
-                    <?php } ?>
+                        <?php }
+                    } ?>
                 </div>
             </div>
         </main>

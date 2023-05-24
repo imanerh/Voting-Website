@@ -49,7 +49,12 @@ require_once("db.php");
                     <?php
                     $ConnectingDB = $GLOBALS['connexion'];
                     $election = $ConnectingDB->query("SELECT * FROM elections");
-                    while ($e = $election->fetch(PDO::FETCH_ASSOC)) { ?>
+                    $datetime = date('Y-m-d H:i:s');
+                    while ($e = $election->fetch(PDO::FETCH_ASSOC)) { 
+                        if ($e["end_date"] < $datetime) {
+                            continue;
+                        } else {
+                    ?>
 
                         <div class="card">
                             <h3>
@@ -79,7 +84,7 @@ require_once("db.php");
                             </form>
                         </div>
 
-                    <?php } ?>
+                    <?php } }?>
                 </div>
             </div>
         </main>

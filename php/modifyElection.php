@@ -101,11 +101,11 @@ if (isset($_POST['confirm'])) {
                                     placeholder="Description">
                             </div>
                             <div class="form-group">
-                                <input class="typeahead" type="date" name="election_end_date" placeholder="End Date"
-                                    id="myDate" min="yyyy-mm-dd">
+                                <input class="typeahead" type="datetime-local" name="election_end_date"
+                                    placeholder="End Date" id="election_end_date" min="yyyy-mm-dd">
                                 <script>
-                                    var today = new Date().toISOString().split('T')[0];
-                                    document.getElementById("myDate").setAttribute("min", today);
+                                    var today = new Date().toISOString().slice(0, 16);
+                                    document.getElementById("election_end_date").setAttribute("min", today);
                                 </script>
                             </div>
                             <button type="submit" class="btn btn-primary me-2 bg-warning" name="confirm"

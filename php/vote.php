@@ -7,8 +7,9 @@ if (isset($_POST['vote_candidate'])) {
 
     $ConnectingDB = $GLOBALS['connexion'];
     $user_id = $_SESSION['user_id'];
+    $datetime = date('Y-m-d H:i:s');
     $vote = "INSERT INTO votes (user_id, election_id, vote, timestamp) 
-               VALUES('$user_id', '$_POST[election_id]', '$_POST[candidate_id]')";
+               VALUES('$user_id', '$_POST[election_id]', '$_POST[candidate_id]', '$datetime')";
     $stmt = $ConnectingDB->prepare($vote);
     $stmt->execute();
     if ($stmt) {
@@ -28,7 +29,7 @@ if (isset($_POST['view_program'])) {
     $video = $_POST["program_video"];
     $affiche = $_POST["program_affiche"];
 
-    header('location: program.php?cid='.$candidate_id.'&eid='.$election_id.'&photo='.$photo.'&name='.$name.'&title='.$title.'&description='.$description.'&video='.$video.'&affiche='.$affiche);
+    header('location: program.php?cid=' . $candidate_id . '&eid=' . $election_id . '&photo=' . $photo . '&name=' . $name . '&title=' . $title . '&description=' . $description . '&video=' . $video . '&affiche=' . $affiche);
 }
 
 ?>
@@ -89,42 +90,44 @@ if (isset($_POST['view_program'])) {
                         echo "<h1>You already voted</h1>";
                     } else {
                         $candidate = $ConnectingDB->query("SELECT * FROM (candidates NATURAL JOIN programs) WHERE election_id='$_POST[election_id]'");
-                        while ($c = $candidate->fetch(PDO::FETCH_ASSOC)) { 
+                        while ($c = $candidate->fetch(PDO::FETCH_ASSOC)) {
                             // If the user is a candidate, he/she can vote on other candidates, but not on himself/herself 
                             if ($c["candidate_id"] == $user_id) {
                                 continue;
                             } else {
-                        ?>
-
-                            <div class="card">
-                                <h2>
-                                    <?php echo $c['name']; ?>
-                                </h2>
-
-                                <?php
-                                if ($c['photo']) {
-                                    echo "<img src='".$c['photo']."' alt='candidate_pic'>";
-                                } else {
-                                    echo "<img src='../images/candidate.jpg' alt='candidate_pic'>";
-                                }
                                 ?>
 
-                                <form method="POST">
-                                    <input type="hidden" name="election_id" value="<?php echo $c['election_id'] ?>">
-                                    <input type="hidden" name="candidate_id" value="<?php echo $c['candidate_id'] ?>">
-                                    <input type="hidden" name="name" value="<?php echo $c['name'] ?>">
-                                    <input type="hidden" name="photo" value="<?php echo $c['photo'] ?>">
-                                    <input type="hidden" name="program_title" value="<?php echo $c['program_title'] ?>">
-                                    <input type="hidden" name="program_description" value="<?php echo $c['program_description'] ?>">
-                                    <input type="hidden" name="program_video" value="<?php echo $c['program_video'] ?>">
-                                    <input type="hidden" name="program_affiche" value="<?php echo $c['program_affiche'] ?>">
+                                <div class="card">
+                                    <h2>
+                                        <?php echo $c['name']; ?>
+                                    </h2>
 
-                                    <button type="submit" id="program" name="view_program" class="btn">View Program</button>
-                                    <button type="submit" id="vote" name="vote_candidate" class="btn">Vote</button>
-                                </form>
-                            </div>
+                                    <?php
+                                    if ($c['photo']) {
+                                        echo "<img src='" . $c['photo'] . "' alt='candidate_pic'>";
+                                    } else {
+                                        echo "<img src='../images/candidate.jpg' alt='candidate_pic'>";
+                                    }
+                                    ?>
 
-                        <?php }}
+                                    <form method="POST">
+                                        <input type="hidden" name="election_id" value="<?php echo $c['election_id'] ?>">
+                                        <input type="hidden" name="candidate_id" value="<?php echo $c['candidate_id'] ?>">
+                                        <input type="hidden" name="name" value="<?php echo $c['name'] ?>">
+                                        <input type="hidden" name="photo" value="<?php echo $c['photo'] ?>">
+                                        <input type="hidden" name="program_title" value="<?php echo $c['program_title'] ?>">
+                                        <input type="hidden" name="program_description"
+                                            value="<?php echo $c['program_description'] ?>">
+                                        <input type="hidden" name="program_video" value="<?php echo $c['program_video'] ?>">
+                                        <input type="hidden" name="program_affiche" value="<?php echo $c['program_affiche'] ?>">
+
+                                        <button type="submit" id="program" name="view_program" class="btn">View Program</button>
+                                        <button type="submit" id="vote" name="vote_candidate" class="btn">Vote</button>
+                                    </form>
+                                </div>
+
+                            <?php }
+                        }
                     } ?>
                 </div>
             </div>

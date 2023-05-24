@@ -14,14 +14,14 @@ CREATE TABLE Elections (
     election_id VARCHAR(30) NOT NULL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
     CHECK (TIMESTAMPDIFF(DAY, start_date, end_date) >= 0)
 );
 
 CREATE TABLE Candidates (
     candidate_id INT AUTO_INCREMENT PRIMARY KEY,
-    election_id INT NOT NULL,
+    election_id VARCHAR(30) NOT NULL,
     name VARCHAR(255) NOT NULL,
     photo VARCHAR(255),
     FOREIGN KEY (election_id) REFERENCES Elections(election_id)
@@ -30,7 +30,7 @@ CREATE TABLE Candidates (
 -- The candidates that are awaiting for the approval of the admin alongside their programs
 CREATE TABLE awaiting_candidates (
     candidate_id INT NOT NULL PRIMARY KEY,
-    election_id INT NOT NULL,
+    election_id VARCHAR(30) NOT NULL,
     name VARCHAR(255) NOT NULL,
     photo VARCHAR(255),
     program_title VARCHAR(255) NOT NULL,
@@ -43,9 +43,9 @@ CREATE TABLE awaiting_candidates (
 CREATE TABLE Votes (
     vote_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    election_id INT NOT NULL,
+    election_id VARCHAR(30) NOT NULL,
     vote INT NOT NULL, -- Candidate's Id
-    timestamp DATE NOT NULL,
+    timestamp DATETIME NOT NULL,
     FOREIGN KEY (election_id) REFERENCES Elections(election_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
@@ -84,11 +84,11 @@ INSERT INTO `elections` (`election_id`, `title`, `description`, `start_date`, `e
 -- Candidates
 
 INSERT INTO `candidates` (`candidate_id`, `election_id`, `name`, `photo`) VALUES
-(100, 100, 'Tristian Morrison', 'https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/ColinStapczynski/phpEiKozG.jpg'),
-(200, 100, 'Samir Cobb', 'https://www.kindredgroup.com/globalassets/images/asset-library/news--insights/magnus-carlsen_unibet-copy.jpg?width=1920&format=webp&quality=78'),
-(300, 200, 'Kelsie Hull', ''),
-(500, 400, 'Rene Campos', 'https://louisville.edu/enrollmentmanagement/images/person-icon/image'),
-(400, 300, 'Jacquelyn Cisneros', 'https://louisville.edu/enrollmentmanagement/images/person-icon/image');
+(100, 'CPI1-2023', 'Tristian Morrison', 'https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/ColinStapczynski/phpEiKozG.jpg'),
+(200, 'CPI1-2023', 'Samir Cobb', 'https://www.kindredgroup.com/globalassets/images/asset-library/news--insights/magnus-carlsen_unibet-copy.jpg?width=1920&format=webp&quality=78'),
+(300, 'CPI1-2024', 'Kelsie Hull', ''),
+(500, 'CPI2-2023', 'Rene Campos', 'https://louisville.edu/enrollmentmanagement/images/person-icon/image'),
+(400, 'CPI3-2023', 'Jacquelyn Cisneros', 'https://louisville.edu/enrollmentmanagement/images/person-icon/image');
 
 -- Programs
 

@@ -10,19 +10,25 @@ if (isset($_POST['confirm'])) {
 
     if (!empty($_POST['election_id']) && !empty($_POST['election_title']) && !empty($_POST['election_description']) && !empty($_POST['election_start_date']) && !empty($_POST['election_end_date'])) { // if all required fields are filled
 
-        $election_id = $_POST['election_id'];
-        $election_title = $_POST['election_title'];
-        $election_description = $_POST['election_description'];
-        $election_start_date = $_POST['election_start_date'];
-        $election_end_date = $_POST['election_end_date'];
+        // Check that the start_date is greater that the end_date
+        if ($_POST['election_start_date'] < $_POST['election_end_date']) {
 
-        $add = "INSERT INTO elections (election_id, title, description, start_date, end_date) 
+            $election_id = $_POST['election_id'];
+            $election_title = $_POST['election_title'];
+            $election_description = $_POST['election_description'];
+            $election_start_date = $_POST['election_start_date'];
+            $election_end_date = $_POST['election_end_date'];
+
+            $add = "INSERT INTO elections (election_id, title, description, start_date, end_date) 
                 VALUES('$election_id', '$election_title', '$election_description', '$election_start_date', '$election_end_date')";
 
-        $stmt = $ConnectingDB->prepare($add);
-        $stmt->execute();
-        if ($stmt) {
-            echo "<script>alert('Election added!')</script>";
+            $stmt = $ConnectingDB->prepare($add);
+            $stmt->execute();
+            if ($stmt) {
+                echo "<script>alert('Election added!')</script>";
+            }
+        } else {
+            echo "<script>alert('Start date should be less than the end date!')</script>";
         }
 
     }
@@ -76,21 +82,34 @@ if (isset($_POST['confirm'])) {
                         <p class="card-description">Add a new election by filling this form</p>
                         <form class="forms-sample" method="post">
                             <div class="form-group">
-                                <input class="typeahead" type="text" name="election_id" placeholder="Election Id" required>
+                                <input class="typeahead" type="text" name="election_id" placeholder="Election Id"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <input class="typeahead" type="text" name="election_title" placeholder="Title" required>
                             </div>
                             <div class="form-group">
-                                <input class="typeahead" type="text" name="election_description" placeholder="Description" required>
+                                <input class="typeahead" type="text" name="election_description"
+                                    placeholder="Description" required>
                             </div>
                             <div class="form-group">
-                                <input class="typeahead" type="date" name="election_start_date" placeholder="Start Date" required>
+                                <input class="typeahead" type="datetime-local" name="election_start_date"
+                                    placeholder="Start Date"  id="election_start_date" min="yyyy-mm-dd" required>
+                                <script>
+                                    var today = new Date().toISOString().slice(0, 16);
+                                    document.getElementById("election_start_date").setAttribute("min", today);
+                                </script>
                             </div>
                             <div class="form-group">
-                                <input class="typeahead" type="date" name="election_end_date" placeholder="End Date" required>
+                                <input class="typeahead" type="datetime-local" name="election_end_date"
+                                    placeholder="End Date" id="election_end_date" min="yyyy-mm-dd" required>
+                                <script>
+                                    var today = new Date().toISOString().slice(0, 16);
+                                    document.getElementById("election_end_date").setAttribute("min", today);
+                                </script>
                             </div>
-                            <button type="submit" class="btn btn-primary me-2 bg-warning" name="confirm" style="border:none; color:black"> Add </button>
+                            <button type="submit" class="btn btn-primary me-2 bg-warning" name="confirm"
+                                style="border:none; color:black"> Add </button>
                         </form>
                     </div>
                 </div>

@@ -66,7 +66,7 @@ require_once("db.php");
                 <!-- Photo upload -->
                 <?php
                 if ($photo) {
-                    echo "<img src='" . $photo . "' alt='candidate_pic' width='300px' height='300px'>";
+                    echo "<img src='" . $photo . "' alt='candidate_pic' width='300px' height='250px' class='rounded mx-auto d-block'>";
                 } else {
                     echo "<img src='../images/candidate.jpg' alt='candidate_pic'>";
                 }

@@ -114,9 +114,9 @@ require_once("db.php");
                 });
             </script>
 
-            <p class="text-center">Total number of voters:
+            <p class="text-center" style="margin-top:10px;">Total number of votes:
                 <b>
-                    <?php echo $totalVotes; ?> voters<b>
+                    <?php echo $totalVotes; ?> votes<b>
             </p>
 
         </main>

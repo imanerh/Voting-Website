@@ -39,7 +39,7 @@ Here are some screenshots showcasing the user interface and functionality of the
    ![Candidature Application](https://github.com/imanerh/Examen_Final/assets/65502022/7ea73b20-835c-402c-9a46-6f51806ced1c)
 
 5. Voting Results:
-   ![Voting Results](https://github.com/imanerh/Examen_Final/assets/65502022/0c13e565-fb50-4af7-896e-146f38d16d88)
+   ![Voting Results](https://github.com/imanerh/Examen_Final/assets/65502022/d407978b-e3e3-4ebc-9460-a1d8e727ff3f)
    
 Feel free to explore the repository to gain further insights into the implementation of this voting website for universities.
 
